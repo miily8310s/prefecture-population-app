@@ -15,3 +15,12 @@ jobs:
           version: latest
       - name: Run Biome
         run: biome ci .
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Npm Check
+        run: npm ci
+      - name: Run Vitest
+        run: npm run test
