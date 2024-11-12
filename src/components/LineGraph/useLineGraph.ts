@@ -1,6 +1,7 @@
 import type { AxisLabelsFormatterContextObject, Options } from "highcharts";
 import { useMemo } from "react";
 import { PopulationGraphData } from "../../types/population";
+import { formatValue } from "../../utils/format";
 
 export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 	// 絶対に変わらない設定値
@@ -20,7 +21,7 @@ export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 			},
 			labels: {
 				formatter(this: AxisLabelsFormatterContextObject) {
-					return `${Number(this.value) / 10000}万`;
+					return formatValue(this.value);
 				},
 			},
 		},
