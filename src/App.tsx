@@ -1,33 +1,42 @@
-import { useState } from "react";
-import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
+import { Suspense } from "react";
 import "./App.css";
-import { PopulationLineGraph } from "./components/LineGraph/PoplulationLineGraph";
+import {
+	QueryClient,
+	QueryClientProvider,
+	QueryErrorResetBoundary,
+} from "@tanstack/react-query";
+import { ErrorBoundary } from "react-error-boundary";
+import { Index } from "./pages";
 
 function App() {
-	const [count, setCount] = useState(0);
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				retry: 0,
+			},
+		},
+	});
 
 	return (
-		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<PopulationLineGraph />
-		</>
+		<QueryClientProvider client={queryClient}>
+			<QueryErrorResetBoundary>
+				{({ reset }) => (
+					<ErrorBoundary
+						fallbackRender={({ resetErrorBoundary }) => (
+							<>
+								<p>エラーが発生しました</p>
+								<button onClick={() => resetErrorBoundary()}>再読み込み</button>
+							</>
+						)}
+						onReset={reset}
+					>
+						<Suspense fallback={<p>読み込み中...</p>}>
+							<Index />
+						</Suspense>
+					</ErrorBoundary>
+				)}
+			</QueryErrorResetBoundary>
+		</QueryClientProvider>
 	);
 }
 

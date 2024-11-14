@@ -1,6 +1,10 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { useLineGraph } from "./useLineGraph";
+import HighchartsAccessibility from "highcharts/modules/accessibility";
+import { useLineGraph } from "../../hooks/useLineGraph";
+
+// see: https://stackoverflow.com/a/75291799
+HighchartsAccessibility(Highcharts);
 
 export const PopulationLineGraph = () => {
 	// MEMO:
@@ -10,8 +14,8 @@ export const PopulationLineGraph = () => {
 	// FIXME: データ取得実装時に削除する
 	const TEST_DATA = [
 		{
-			id: "1",
-			name: "北海道",
+			prefCode: 1,
+			prefName: "北海道",
 			type: "line",
 			data: [
 				[1995, 1681479],
@@ -28,8 +32,8 @@ export const PopulationLineGraph = () => {
 			],
 		},
 		{
-			id: "2",
-			name: "青森県",
+			prefCode: 2,
+			prefName: "青森県",
 			type: "line",
 			data: [
 				[1995, 1281479],

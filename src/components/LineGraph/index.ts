@@ -1,1 +1,1 @@
-export { PopulationLineGraph } from "./PoplulationLineGraph";
+export { PopulationLineGraph } from "./PopulationLineGraph";

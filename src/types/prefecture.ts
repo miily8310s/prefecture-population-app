@@ -1,4 +1,9 @@
+export interface PrefecturesResponse {
+	message: string;
+	result: Prefecture[];
+}
+
 export interface Prefecture {
-	id: string;
-	name: string;
+	prefCode: number;
+	prefName: string;
 }
