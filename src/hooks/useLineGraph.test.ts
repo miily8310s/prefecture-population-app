@@ -4,6 +4,40 @@ import { useLineGraph } from "./useLineGraph";
 
 const TEST_DATA = [
 	{
+		prefCode: 1,
+		prefName: "北海道",
+		type: "line",
+		data: [
+			[1995, 1681479],
+			[1996, 1581479],
+			[1997, 1621479],
+			[1998, 1581479],
+			[1998, 1481479],
+			[2000, 1661479],
+			[2001, 1661479],
+			[2002, 1661479],
+			[2003, 1661479],
+			[2004, 1661479],
+			[2005, 1661479],
+		],
+	},
+	{
+		prefCode: 2,
+		prefName: "青森県",
+		type: "line",
+		data: [
+			[1995, 1281479],
+			[1996, 1481479],
+			[1997, 1221479],
+			[1998, 1181479],
+			[1998, 1381479],
+			[2000, 1561479],
+		],
+	},
+];
+
+const TEST_RESPONSE = [
+	{
 		id: "1",
 		name: "北海道",
 		type: "line",
@@ -76,7 +110,10 @@ describe("useLineGraph", () => {
 					},
 				],
 			},
-			series: TEST_DATA,
+			accessibility: {
+				description: "都道府県別人口構成グラフです",
+			},
+			series: TEST_RESPONSE,
 		});
 	});
 });

@@ -1,7 +1,7 @@
 import type { AxisLabelsFormatterContextObject, Options } from "highcharts";
 import { useMemo } from "react";
-import { PopulationGraphData } from "../../types/population";
-import { formatValue } from "../../utils/format";
+import { PopulationGraphData } from "../types/population";
+import { formatValue } from "../utils/format";
 
 export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 	// 絶対に変わらない設定値
@@ -44,6 +44,9 @@ export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 				},
 			],
 		},
+		accessibility: {
+			description: "都道府県別人口構成グラフです",
+		},
 	};
 	// 選択した都道府県など選択内容によってメモ化しておく
 	const options: Options = useMemo(() => {
@@ -51,9 +54,9 @@ export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 			...OPTIONS,
 			series: populationGraphData.map((populationData) => {
 				return {
-					id: `${populationData.id}`,
+					id: `${populationData.prefCode}`,
 					type: "line",
-					name: populationData.name,
+					name: populationData.prefName,
 					data: populationData.data,
 				};
 			}),
