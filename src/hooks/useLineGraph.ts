@@ -48,6 +48,7 @@ export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 			description: "都道府県別人口構成グラフです",
 		},
 	};
+
 	// 選択した都道府県など選択内容によってメモ化しておく
 	const options: Options = useMemo(() => {
 		return {
@@ -57,7 +58,7 @@ export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 					id: `${populationData.prefCode}`,
 					type: "line",
 					name: populationData.prefName,
-					data: populationData.data,
+					data: populationData.data[0].data.map((d) => [d.year, d.value]),
 				};
 			}),
 		};

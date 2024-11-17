@@ -1,10 +1,9 @@
-import { Suspense } from "react";
-import "./App.css";
 import {
 	QueryClient,
 	QueryClientProvider,
 	QueryErrorResetBoundary,
 } from "@tanstack/react-query";
+import { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Index } from "./pages";
 

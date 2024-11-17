@@ -1,9 +1,17 @@
-import { PrefectureCheckBoxField } from "../components/CheckBox";
-import { PopulationLineGraph } from "../components/LineGraph/PopulationLineGraph";
+import { Suspense, lazy } from "react";
+import { CircleSpinner } from "../components/Spinner";
 import { usePrefectures } from "../hooks/usePrefectures";
 
+const PrefectureCheckBoxField = lazy(
+	() => import("../components/CheckBox/PrefectureCheckBoxField"),
+);
+
+const PopulationLineGraph = lazy(
+	() => import("../components/LineGraph/PopulationLineGraph"),
+);
+
 export const Index = () => {
-	const { prefectures, onCheckChange } = usePrefectures();
+	const { prefectures, selectedPrefectures, onCheckChange } = usePrefectures();
 	return (
 		<>
 			<h1 className="heading">都道府県グラフアプリ</h1>
@@ -12,7 +20,11 @@ export const Index = () => {
 				prefectures={prefectures}
 				onChange={onCheckChange}
 			/>
-			<PopulationLineGraph />
+			<Suspense
+				fallback={<CircleSpinner description="グラフデータ読み込み中" />}
+			>
+				<PopulationLineGraph selectedPrefectures={selectedPrefectures} />
+			</Suspense>
 		</>
 	);
 };

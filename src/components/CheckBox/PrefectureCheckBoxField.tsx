@@ -26,3 +26,5 @@ export const PrefectureCheckBoxField: FC<CheckBoxFieldProps> = (props) => {
 		</fieldset>
 	);
 };
+
+export default PrefectureCheckBoxField;
