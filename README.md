@@ -1,50 +1,134 @@
-# React + TypeScript + Vite
+# 都道府県人口構成グラフアプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+チェックを入れた都道府県の人口構成をグラフで確認できます。
 
-Currently, two official plugins are available:
+https://prefecture-population-app-cyan.vercel.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 技術スタック
 
-## Expanding the ESLint configuration
+- [Vite](https://vite.dev/)
+- [TypeScript](https://www.typescriptlang.org/) 
+- [React](https://react.dev/) - フレームワーク
+- [Tanstack Query](https://tanstack.com/query/latest) - API取得管理
+- [react-error-boundary](https://github.com/bvaughn/react-error-boundary) - 画面エラーハンドリング
+- [Highcharts](https://www.highcharts.com/) - グラフツール
+- [Biome](https://biomejs.dev/) - リンター・フォーマッター
+- [Vitest](https://vitest.dev/) / [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) - テスト
+- [msw](https://mswjs.io/) - モックサーバー
+- [GitHub Actions](https://docs.github.com/en/actions) - CI
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+[Viteのreact-tsテンプレート](https://vite.dev/guide/#scaffolding-your-first-vite-project)から作成しています。
 
-- Configure the top-level `parserOptions` property like this:
+## ローカル環境で確認する方法
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+> [!WARNING]
+> Node.js >= 20がインストールされている必要があります。
+
+`.env`を以下コマンドで作成します。
+
+```shell
+$ cp .env.example .env
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- `VITE_API_URL` - APIのエンドポイントURL
+- `VITE_X_API_KEY` - 指定されたAPI Key
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+その後、以下でサイトが立ち上がります。
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```shell
+$ npm i
+$ npm run dev
 ```
+
+### Visual Studio Codeでの確認
+
+リント・フォーマッターの確認には[Biome公式拡張機能](https://marketplace.visualstudio.com/items?itemName=biomejs.biome)が必要です。
+
+詳細は以下ページに記載されています。
+https://biomejs.dev/reference/vscode/#installation
+
+### ビルド
+
+プロダクション環境用のビルドは以下で実行可能です。
+
+```shell
+$ npm run build
+$ npm run preview
+```
+
+詳細は以下のページに掲載されています。
+
+- [ViteのCLIコマンドについて](https://vite.dev/guide/cli.html#vite-preview)
+- [ビルドで生成したファイルの表示について](https://vite.dev/guide/troubleshooting#built-file-does-not-work-because-of-cors-error)
+
+## コマンド
+
+- `npm run dev` - ローカル環境でサイトが立ち上がります
+- `npm run check` - コードの静的チェック（リント・フォーマット）
+- `npm run test` - テストコードの実行
+
+GitHub Actionsではコミットのpush時に、下2つを実行しチェックを行っています。
+
+
+## Git管理
+
+[Angular](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#-commit-message-format)のルールを基に作成しています。
+
+ブランチ名に関しては
+
+```
+<prefix>/#<issue番号>
+```
+
+ブランチ名のprefixは以下から選択しています。
+- `docs` - 文言やテキストの修正のみ
+- `feature` - 新しい機能の実装
+- `fix` - バグの修正
+
+コミットメッセージは以下のフォーマットとなります。
+
+```
+<prefix>:#<issue番号> <対応の概要>
+```
+
+コミットメッセージのprefixは以下から選択しています。
+- `docs:` - 文言やテキストの修正のみ
+- `feat:` - 新しい機能の実装
+- `fix:` - バグの修正
+
+
+## 開発構成
+
+### ディレクトリ構成
+
+`src`ディレクトリ配下に画面用のファイルを設置しています。
+
+- `api`
+  - APIのfetch用関数およびmswで使用するモックデータの設置
+- `components`
+  - コンポーネントの設置
+- `hooks`  
+  - pages層やコンポーネントで使用するhooksの設置
+- `pages`  
+  - 画面のcontainerの設置。
+  - APIのfetchを行うhooksを呼び、コンポーネントにpropsとして代入し、画面に表示します。
+- `types`
+  - APIのレスポンス・コンポーネントのセットで使用する型の設置
+- `utils`
+  - フォーマットした値の返却など汎用的に使用する関数の設置
+
+### Biome
+
+リンター・フォーマッター両方をBiome1つで解決させています。
+
+なおリンターのルールに関しては、もともとViteのテンプレートに入っていたESLintのルールをマイグレーションしたものを使用しています[（対応時のPR）](https://github.com/miily8310s/prefecture-population-app/pull/9)。
+
+### テストコード
+
+Vitestを使用し作成・実行を行っています。
+
+APIのfetchが伴うテストケースに関しては、`vitest.setup.ts`でmswのモックサーバーを立ち上げたうえで、確認を行っています(*1)。
+
+またコンポーネント・hooksのテストについてはReact Testing Libraryを使用し作成しています。
+
+*1 モックサーバーから返却されるモックデータは`api/mocks/handlers.ts`で定義しています。
