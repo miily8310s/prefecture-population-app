@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { fetchPrefectures } from "../api/fetchData";
 import { Prefecture } from "../types/prefecture";
 
@@ -34,11 +34,31 @@ export const usePrefectures = () => {
 		}
 	};
 
+	const onAllCheck = () => {
+		setSelectedPrefectures([...prefectures]);
+	};
+
+	const onAllReset = () => {
+		setSelectedPrefectures([]);
+	};
+
+	const isCheckedPrefecture = useCallback(
+		(currentCode: number) => {
+			return (
+				selectedPrefectures.filter((p) => p.prefCode === currentCode).length > 0
+			);
+		},
+		[selectedPrefectures],
+	);
+
 	return {
 		prefectures: prefectures ?? [],
 		isPending,
 		error,
 		selectedPrefectures,
+		isCheckedPrefecture,
 		onCheckChange,
+		onAllCheck,
+		onAllReset,
 	};
 };

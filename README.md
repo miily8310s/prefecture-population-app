@@ -85,7 +85,7 @@ GitHub Actionsではコミットのpush時に、下2つを実行しチェック�
 - `feature` - 新しい機能の実装
 - `fix` - バグの修正
 
-コミットメッセージは以下のフォーマットとなります。
+コミットメッセージは以下のフォーマットとなります。特に設けられてない場合はissue番号は省略可能です。
 
 ```
 <prefix>:#<issue番号> <対応の概要>
@@ -132,3 +132,15 @@ APIのfetchが伴うテストケースに関しては、`vitest.setup.ts`でmsw�
 またコンポーネント・hooksのテストについてはReact Testing Libraryを使用し作成しています。
 
 *1 モックサーバーから返却されるモックデータは`api/mocks/handlers.ts`で定義しています。
+
+## 参考記事
+
+[こちら](https://github.com/miily8310s/prefecture-population-app/blob/main/REFERENCE.md)に記載しています。
+
+## Favicon画像ライセンス
+
+Copyright (c) Praveen Juge
+
+MIT License
+
+https://github.com/praveenjuge/mynaui-icons/blob/main/LICENSE

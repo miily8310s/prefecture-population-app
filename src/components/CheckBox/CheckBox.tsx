@@ -3,6 +3,7 @@ import { FC } from "react";
 type CheckBoxProps = {
 	id: number;
 	name: string;
+	checked: boolean;
 	onChange: (value: boolean, data: { id: number; name: string }) => void;
 };
 
@@ -17,6 +18,7 @@ export const CheckBox: FC<CheckBoxProps> = (props) => {
 						name: props.name,
 					})
 				}
+				checked={props.checked}
 			/>
 			{props.name}
 		</label>

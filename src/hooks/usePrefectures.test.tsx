@@ -36,6 +36,36 @@ describe("usePrefectures", () => {
 		]);
 		expect(result.current.selectedPrefectures).toStrictEqual([]);
 	});
+	test("isCheckedPrefecture", async () => {
+		const { result } = renderHook(() => usePrefectures(), {
+			wrapper: Wrapper,
+		});
+		await waitFor(() => expect(result.current.isPending).toBe(false));
+		act(() => result.current.onCheckChange(true, { id: 3, name: "岩手県" }));
+		expect(result.current.isCheckedPrefecture(3)).toBe(true);
+	});
+	test("act onAllCheck", async () => {
+		const { result } = renderHook(() => usePrefectures(), {
+			wrapper: Wrapper,
+		});
+		await waitFor(() => expect(result.current.isPending).toBe(false));
+		act(() => result.current.onAllCheck());
+		expect(result.current.selectedPrefectures).toStrictEqual(
+			result.current.prefectures,
+		);
+	});
+	test("act onAllReset", async () => {
+		const { result } = renderHook(() => usePrefectures(), {
+			wrapper: Wrapper,
+		});
+		await waitFor(() => expect(result.current.isPending).toBe(false));
+		act(() => result.current.onCheckChange(true, { id: 22, name: "テスト県" }));
+		expect(result.current.selectedPrefectures).toStrictEqual([
+			{ prefCode: 22, prefName: "テスト県" },
+		]);
+		act(() => result.current.onAllReset());
+		expect(result.current.selectedPrefectures).toStrictEqual([]);
+	});
 	test("act onCheckChange", async () => {
 		const { result } = renderHook(() => usePrefectures(), {
 			wrapper: Wrapper,
