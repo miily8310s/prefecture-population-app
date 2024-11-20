@@ -4,7 +4,8 @@ import { PopulationGraphData } from "../types/population";
 import { formatValue } from "../utils/format";
 
 export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
-	// 絶対に変わらない設定値
+	const MAX_YEAR = new Date().getFullYear();
+
 	const OPTIONS: Options = {
 		title: {
 			text: "都道府県グラフ",
@@ -58,7 +59,10 @@ export const useLineGraph = (populationGraphData: PopulationGraphData[]) => {
 					id: `${populationData.prefCode}`,
 					type: "line",
 					name: populationData.prefName,
-					data: populationData.data[0].data.map((d) => [d.year, d.value]),
+					data:
+						populationData.data[0].data
+							.filter((c) => c.year <= MAX_YEAR)
+							.map((d) => [d.year, d.value]) ?? [],
 				};
 			}),
 		};

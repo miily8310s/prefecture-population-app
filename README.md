@@ -136,3 +136,11 @@ APIのfetchが伴うテストケースに関しては、`vitest.setup.ts`でmsw�
 ## 参考記事
 
 [こちら](https://github.com/miily8310s/prefecture-population-app/blob/main/REFERENCE.md)に記載しています。
+
+## Favicon画像ライセンス
+
+Copyright (c) Praveen Juge
+
+MIT License
+
+https://github.com/praveenjuge/mynaui-icons/blob/main/LICENSE

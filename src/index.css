@@ -54,6 +54,12 @@ button:hover {
 	background-color: #2c2828;
 }
 
+.buttons {
+	> button:first-child {
+		margin-right: 1rem;
+	}
+}
+
 .checkboxes {
 	list-style: none;
 	display: flex;

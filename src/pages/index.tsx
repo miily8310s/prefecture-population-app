@@ -11,13 +11,23 @@ const PopulationLineGraph = lazy(
 );
 
 export const Index = () => {
-	const { prefectures, selectedPrefectures, onCheckChange } = usePrefectures();
+	const {
+		prefectures,
+		selectedPrefectures,
+		isCheckedPrefecture,
+		onCheckChange,
+		onAllCheck,
+		onAllReset,
+	} = usePrefectures();
 	return (
 		<>
 			<h1 className="heading">都道府県グラフアプリ</h1>
 			<PrefectureCheckBoxField
 				title="都道府県一覧"
 				prefectures={prefectures}
+				isCheckedPrefecture={isCheckedPrefecture}
+				onAllCheck={onAllCheck}
+				onAllReset={onAllReset}
 				onChange={onCheckChange}
 			/>
 			<Suspense
