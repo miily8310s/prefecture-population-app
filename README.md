@@ -132,3 +132,7 @@ APIのfetchが伴うテストケースに関しては、`vitest.setup.ts`でmsw�
 またコンポーネント・hooksのテストについてはReact Testing Libraryを使用し作成しています。
 
 *1 モックサーバーから返却されるモックデータは`api/mocks/handlers.ts`で定義しています。
+
+## 参考記事
+
+[こちら](https://github.com/miily8310s/prefecture-population-app/blob/main/REFERENCE.md)に記載しています。
