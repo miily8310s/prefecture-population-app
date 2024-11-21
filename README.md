@@ -70,11 +70,25 @@ $ npm run preview
 GitHub Actionsではコミットのpush時に、下2つを実行しチェックを行っています。
 
 
+## issue管理
+
+`.github/ISSUE_TEMPLATE`フォルダにissueテンプレートを使用し、機能開発・バグissueそれぞれで
+使用できるようにしています。
+
+issueは以下のラベルで起票しています。
+- `enhancement` - 機能実装
+- `document` - ドキュメントの作成
+
+またPull Requestに関しても`.github/PULL_REQUEST_TEMPLATE`に本文のテンプレートを作成し、
+作成時にテンプレートから説明文を作成できるようにしています。
+
 ## Git管理
 
 [Angular](https://github.com/angular/angular/blob/main/CONTRIBUTING.md#-commit-message-format)のルールを基に作成しています。
 
-ブランチ名に関しては
+### ブランチ
+
+ブランチ名に関しては以下のフォーマットとなります。
 
 ```
 <prefix>/#<issue番号>
@@ -84,6 +98,8 @@ GitHub Actionsではコミットのpush時に、下2つを実行しチェック�
 - `docs` - 文言やテキストの修正のみ
 - `feature` - 新しい機能の実装
 - `fix` - バグの修正
+
+### コミット
 
 コミットメッセージは以下のフォーマットとなります。特に設けられてない場合はissue番号は省略可能です。
 
@@ -96,6 +112,7 @@ GitHub Actionsではコミットのpush時に、下2つを実行しチェック�
 - `feat:` - 新しい機能の実装
 - `fix:` - バグの修正
 
+なおマージするコミットメッセージには「ミスの修正」などは含めないようにし、実装内容（issue内容）1つに1コミットにまとめた形で作成しています。
 
 ## 開発構成
 
